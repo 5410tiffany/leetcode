@@ -1,12 +1,16 @@
 class Solution {
 public:
+    int memo[20001];
+
     int dp(vector<int>& nums, int remain){
-        if(remain == 0){ cout << 1 << endl; return 1;} //terminate pt
+        if (memo[remain] != -1){return memo[remain];} // get data calculated before from memo
         
+        if(remain == 0){return 1;} //terminate pt
+
         int result = 0;
         
         for (int i=0;i<nums.size();i++){
-            if (remain - nums[i] < 0){break;}
+            if (remain - nums[i] < 0){break;} // the rest of num[i]s are too big to add to subset bc we sort arr first
             
             else { //need include 0: if not, we will never reach dp(0) and return 1
                 result += dp(nums, remain-nums[i]);  
@@ -14,13 +18,19 @@ public:
             }
             
         }
-        cout << endl;
+
+        memo[remain] = result; //update subset result to memo
         return result;
     }
     
     int combinationSum4(vector<int>& nums, int target) {
+            memset(memo,-1,sizeof(memo));
+            memo[0] = 1; 
+    
         sort(nums.begin(), nums.end()); //sort to optimize
         return dp(nums, target);
     }
     
 };
+
+
