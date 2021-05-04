@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int dp(vector<int>& nums, int remain){
+        if(remain == 0){ cout << 1 << endl; return 1;} //terminate pt
+        
+        int result = 0;
+        
+        for (int i=0;i<nums.size();i++){
+            if (remain - nums[i] < 0){break;}
+            
+            else { //need include 0: if not, we will never reach dp(0) and return 1
+                result += dp(nums, remain-nums[i]);  
+                cout << result << " ";
+            }
+            
+        }
+        cout << endl;
+        return result;
+    }
+    
+    int combinationSum4(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end()); //sort to optimize
+        return dp(nums, target);
+    }
+    
+};
