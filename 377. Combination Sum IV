@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int memo[20001];
+    int memo[1001];
 
     int dp(vector<int>& nums, int remain){
         if (memo[remain] != -1){return memo[remain];} // get data calculated before from memo
