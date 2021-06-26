@@ -1,0 +1,51 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rv(self, head: ListNode, k: int) -> ListNode:
+        prev, cur = ListNode(0), head
+        while k:
+            # print(cur.val)
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+            k -= 1
+        
+        # detach nullhead
+        head.next = None
+        
+        #prev: [2,1], cur: [3,..]
+        return prev, cur
+    
+    def checknxtk(self, head: ListNode, k: int):
+        # True if nxt k nodes exist null, else return False
+        
+        while k > 0:
+            if head == None:
+                return True
+            head = head.next
+            k -= 1
+        return False
+    
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        ll = nullh = ListNode(0)
+        l = head
+        cnt = 2
+        while True:
+            if self.checknxtk(l, k):
+                break
+            #reverse & relink
+            r, rr = self.rv(l, k)
+            ll.next = r
+            l.next = rr
+
+            #update new ll & l
+            ll = l
+            l = rr
+            cnt -= 1
+            
+            
+        return nullh.next
