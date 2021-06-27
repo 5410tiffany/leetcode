@@ -1,0 +1,41 @@
+class Solution:
+    def find132pattern(self, nums: List[int]) -> bool:
+        
+        
+        '''
+        想法：kill me it's so hard
+        '''
+        stack = [1e9+1]
+        minvalue = nums[0] 
+        n = len(nums)
+        mintilj = [-1]*n
+        mintilj[0] = nums[0]
+        
+        if n < 3:
+            return False
+        
+        #calculate minvalue for 0~j
+        for j in range(1,n):
+            mintilj[j] =  min(mintilj[j-1], nums[j])
+            # print(f'{j}, {mintilj[j]}, {nums[j]}')
+        
+        
+        for j in range(n-1,-1,-1):
+            # print(stack)
+            
+            top = stack.pop()
+            # rm stack where values < mintilj; stack is monotomic increasing
+            while(top <= mintilj[j]):
+                # print("pop")
+                top = stack.pop()
+            
+            if (top < nums[j]): #biggest in stack(k) that's greater than mintilj
+                return True
+            
+            stack.append(top)
+            stack.append(nums[j])
+
+        
+    
+        return False
+        
