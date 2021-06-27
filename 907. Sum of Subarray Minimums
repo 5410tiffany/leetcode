@@ -1,0 +1,30 @@
+import numpy
+class Solution:
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        mod = 1e9 + 7
+        # [值][貢獻]
+        stack = [[-1,0]]
+        top = -1
+        sum = 0
+        ans = 0
+        
+        # make the monotonic 2d stack: [值][貢獻] = [a][aw] (this value); [top][topw](top value) 
+        for a in arr:
+            # print(stack)
+            aw = 1 # init weight for "a" element
+            top, topw = stack.pop()
+            while(top > a ):
+                # print(f'pop{top}')
+                sum -= top * topw
+                # pop stack, add to weight
+                aw += topw 
+                top, topw = stack.pop()
+            
+            # push when top < a
+            stack.append([top,topw])
+            stack.append([a, aw])
+            sum += a * aw # a added in needs will increase how much
+            ans = int((ans + sum % mod) % mod) # total
+        print(stack)
+        return ans
+        
