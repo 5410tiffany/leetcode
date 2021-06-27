@@ -1,0 +1,23 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        hash = {}
+        stack = [10001]
+        sol = []
+        top = 10001
+        # build hash func where key:value = num : nxt geater
+
+        for n in nums2:
+            top = stack.pop()
+            while(n > top):
+                hash[top] = n
+                top = stack.pop()
+                # print(stack)
+            stack.append(top)
+            stack.append(n)
+            # print(stack)
+        
+        for n in nums1:
+            ans = -1 if not hash.get(n) else hash.get(n)
+            sol.append(ans) 
+            
+        return sol
