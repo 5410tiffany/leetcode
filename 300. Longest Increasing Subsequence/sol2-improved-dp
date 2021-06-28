@@ -1,0 +1,28 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        '''
+        time complexity: O(n^2)
+        space complexity: O(n)
+        經典DP題
+        1.狀態: dp[i] = length of LIS ends at idx i
+        2.轉移: dp[i] = min(dp[j]+1, dp[i]) if nums[j]<nums[i]
+        3.BC: init dp[i] = 1; starts from i=1
+        '''
+        n = len(nums)
+        dp = [1] * n
+        sub = [nums[0]]
+
+        # i > j
+        for i in range(1,n):
+            # print(sub)
+            if nums[i] > sub[-1]:
+                sub.append(nums[i])
+            else:
+                for j in range(len(sub)):
+                    if sub[j] >= nums[i]: # need "=" bc [4, 10] ->[4, 4] isn't not strictly increasing subsequence
+                        sub[j] = nums[i]
+                        break
+        
+        
+        
+        return len(sub)
