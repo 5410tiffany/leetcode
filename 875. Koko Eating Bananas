@@ -1,0 +1,34 @@
+class Solution:
+    def tryspeedk(self, piles, k, h): 
+        '''
+        test if koko can finish in eating speed k
+        '''
+        totaltime = 0
+        for p in piles:
+            totaltime += math.ceil(p/k)
+            if totaltime > h:
+                return False
+            # print(totaltime)
+        
+        return True
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        '''
+        想法：判斷bs when ans可以用猜數字的方法解
+        r = maxk possible
+        l = mink possible
+        '''
+        n = len(piles)
+        l = 1
+        r = math.ceil(max(piles) / math.floor(h/n))
+    
+        print(f'{math.ceil(h/n)}, {max(piles)}, {l}, {r}')
+        
+        while(r > l):
+            mid = math.floor((l + r) / 2)
+            if (self.tryspeedk(piles, mid, h)):
+                r = mid
+            else:
+                l = mid + 1
+            
+        
+        return l
