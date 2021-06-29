@@ -1,6 +1,8 @@
 class Solution:
     def dfs(self, graph, mark, v):
-        
+        '''
+        遞迴 call dfs()必須用判斷式的形式 -> 這樣return false才會傳遞回main function
+        '''
         print(f'--{mark}, {v}--')
         
         for e in graph[v]: # each neighbor of vertice v
@@ -9,8 +11,9 @@ class Solution:
                 return False
             elif not mark[e]: 
                 mark[e] = 'O' if mark[v] == 'X' else 'X'
-                # print(f'{e}, {mark[e]}') 
-                if not self.dfs(graph, mark, e): return False
+                
+                # not self.dfs(...) bc if return false nothing happens
+                if not self.dfs(graph, mark, e): return False 
             
             
         
