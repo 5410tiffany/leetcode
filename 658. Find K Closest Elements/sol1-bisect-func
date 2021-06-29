@@ -1,0 +1,29 @@
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        mid = bisect_left(arr, x)
+        r  = mid
+        l = mid - 1
+        # print(f'{mid}, {r}, {l}, {arr[:len(arr)]}')
+        
+        
+        # b.c. 
+#         if mid == len(arr) - 1:
+#             return arr[-k:]
+#         elif mid == 0:
+#             return arr[:k]
+        
+
+        for i in range(k):
+            a = inf if l < 0 else arr[l]
+            b = inf if r >= len(arr) else arr[r] 
+
+            # retrieve left element if 1. |ar[l]-x| <= |ar[r]-x| 
+            if abs(a - x) <= abs(b - x):
+                l -= 1
+            else:
+                r += 1
+            
+            # print(arr[l+1:r])
+        # print(f'{l}, {r}') # ans = (r, l) 開區間
+        return  arr[l+1:r]
+        
