@@ -1,0 +1,26 @@
+class Solution:
+    def lis(self, nums):
+        dp = []
+        for i in range(len(nums)):
+            idx = bisect_left(dp, nums[i])
+            if idx == len(dp):
+                dp.append(nums[i])
+            else:
+                dp[idx] = nums[i]
+        return len(dp)
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+        '''
+        想法：
+        1. 狀態：dp[i] = max dolls in envelopes[i]
+        2. dp[i] = max(d[i], d[a] + 1) where env[a] 可放進 env[i]
+        3. b.c. dp[0] = 1
+        '''
+        n = len(envelopes)
+        envelopes.sort(key=lambda x: (x[0], -x[-1])) # sort increasing in first axis and decreasing on second
+        dim1arr = [i[1] for i in envelopes]
+        print(envelopes)
+        print(dim1arr)
+        
+        
+        return self.lis(dim1arr)
+        
