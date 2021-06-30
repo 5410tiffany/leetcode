@@ -1,0 +1,57 @@
+
+class Solution:
+    def topological_sort(self, v: int):
+        self.vis[v] = True
+        self.instack[v] = True
+        
+        # for each neighbor u of vertice v:
+        if v in self.G:
+            for u in self.G[v]:
+                # print(u)
+                if self.instack[u]: 
+                    # print("cycle")
+                    return False # cycle formed
+                elif not self.vis[u]:
+                    if not self.topological_sort(u): 
+                        # print(f"cycle rec.{u}")
+                        return False
+
+        # print("topo end")
+        self.instack[v] = False
+        self.courses.append(v)
+        return True
+        
+    def findOrder(self, numCourses, prerequisites) -> List[int]:
+        '''
+        Topological Sort 
+        White: not vis
+        Grey: vis and instack
+        Black: vis and not instack
+        :type numCourses: int
+        :type prerequisite: List[List[int]]
+        '''
+        
+        self.vis = [False] * numCourses
+        self.instack = [False] * numCourses
+        self.G = defaultdict(list)
+        self.courses = []
+        
+        # Turn graph into adjacency list
+        # destination(course) <- source(prerequisites)
+        for dest, src in prerequisites:
+            # print(f'{p[0], p[1]}')
+            self.G[dest].append(src)
+        
+        print(self.G)
+        for v in range(numCourses):
+            # print(f'--{v}: {self.G[v]}--')
+            if not self.vis[v]: 
+                if not self.topological_sort(v): 
+                    print(f"-{v}, {self.courses}-")
+                    self.courses =[]
+                    return self.courses
+            # print(self.G)
+            # print("--")
+        
+        return self.courses
+                
