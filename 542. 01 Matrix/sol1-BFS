@@ -1,0 +1,53 @@
+
+class Solution:
+    def bfs(self, y, x):
+
+        #上下左右
+        dx = [0,0,-1,1]
+        dy = [-1,1,0,0]
+        
+        
+        for i in range(4):
+            newx = x + dx[i]
+            newy = y + dy[i]
+            if(newy >= 0 and newy < self.row and newx >= 0 and newx < self.col and self.sol[newy][newx] == inf):
+                # print(f'{y}, {x}, {self.sol[y][x]} ->{newy}, {newx},{self.sol[newy][newx]}')
+                
+                #update neighbor
+                self.sol[newy][newx] = min(self.sol[y][x] + 1, self.sol[newy][newx]) 
+                
+                #enque neighbor
+                self.queue.append([newy, newx]) 
+        
+        return
+
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        self.row = len(mat)
+        self.col = len(mat[0])
+        self.mat = mat
+        self.sol = [ [None]*self.col for _ in range(self.row) ]  
+        self.queue = []
+
+        
+        '''
+        想法：等時/等cost -> bfs
+        1. 從mat[i][j] == 0的地方開始calculate: 先放進queue
+        2. pop queue, calculate neighbors
+        3. examin neighbor
+        '''
+        #init solution matrix 0->0; 1->inf
+        for r in range(self.row):
+            for c in range(self.col):
+                if not self.mat[r][c]: 
+                    self.sol[r][c] = 0
+                    self.queue.append([r,c]) #enque
+                else: self.sol[r][c] = inf
+        
+        # print(self.sol)
+        
+        while(len(self.queue) != 0):
+            # print(self.queue)     
+            r, c = self.queue.pop(0)
+            self.bfs(r, c)
+        
+        return self.sol
