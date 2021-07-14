@@ -29,10 +29,10 @@ class Solution:
             # don't need to continue traversing if got a better path-> this is not necessary
             if self.mindist[node] < dist: continue    
                 
-            # update mindist    
+            # update mindist (relax node)
             self.mindist[node] = min(dist, self.mindist[node])
             
-            # relax node's neighbor who hasn't visited before and put them into pq
+            # consider node's neighbor who hasn't visited before and put them into pq
             for dest, w in self.G[node]: 
                 if self.mindist[dest] == float('inf'):
                     heapq.heappush(pq, (w+dist, dest))
