@@ -30,7 +30,7 @@ class Solution:
         node points to itself = 1
         '''
         
-        # build graph
+        # build bi-directional graph from equations 
         self.G = defaultdict(list)
         
         for (src, dest), w in zip(equations, values):
