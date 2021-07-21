@@ -12,7 +12,6 @@ class Solution:
         idx不同set組成相同不可重複計算
         1. 決定pair sum set: {pairsum: i, j}
         2. check if need_i in pair sum set && minidx > i  
-        TLE
         '''
         nums.sort()
         self.ans = []
@@ -20,23 +19,26 @@ class Solution:
         
         
                 
-        # determine pair sum set
-        for i in range(len(nums)-1, -1, -1):
-            for j in range(i-1, -1, -1):
+        # determine pair sum set >= 0 
+        for i in range(len(nums)-1, 0, -1):
+            for j in range(i-1, 0, -1):
                 psum = nums[i] + nums[j]
                 # print(f'{i}, {j}, {psum}')
-                pairset[psum].append((i,j)) # j smaller
+                if psum >=0:
+                    pairset[psum].append((i,j)) # j smaller
                 
         # print(pairset)
         
-        # check if need_i in pairset
-        for i in range(len(nums)):
+        # check if need_i in pairset: need_i
+        i = 0
+        while i < len(nums):
             if -nums[i] in pairset: 
-                self.twosum(i, nums, pairset[-nums[i]]) 
+                self.twosum(i, nums, pairset[-nums[i]])
+                while i + 1 < len(nums) and nums[i] == nums[i + 1]: 
+                    i += 1
+                
+            if nums[i] >= 0:
+                break
+            i += 1
                 
         return self.ans
-            
-        
-        
-        
-        return
