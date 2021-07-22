@@ -8,7 +8,6 @@ class Solution:
         2. abs(idxi - idxj) 最大值必出現在idxj = minidx or maxidx 的地方
         
         time: O(n)
-        greedy
         '''
         ls = []
         
