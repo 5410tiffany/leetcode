@@ -25,11 +25,11 @@ class Solution:
     
         # ls is in increasing order -> reverse the whole ls 
         if idxa==-1: 
-            print(f'{i}, {nums}, {nums[::-1]}')
+            # print(f'{i}, {nums}, {nums[::-1]}')
             nums.reverse()
             return 
 
-        # print('yoooo')
+
         # find numsb: number just larger than numsa
         for j in range(idxa+1, len(nums), 1):
             if nums[j] <= numa:
@@ -45,11 +45,11 @@ class Solution:
         
         # swap
         nums[idxa], nums[idxb] = nums[idxb], nums[idxa]
-        print(f'{idxa}, {idxb}, {nums}')
+        # print(f'{idxa}, {idxb}, {nums}')
         
         # reverse interval
         nums[idxa+1:] = nums[idxa+1:][::-1] 
-        print(nums)
+        # print(nums)
         
         return
 
