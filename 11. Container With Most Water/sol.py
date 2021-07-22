@@ -6,7 +6,9 @@ class Solution:
         想法:
         1. 算area只考慮height比自己大的 則area = heighti * abs(idxi - idxj)
         2. abs(idxi - idxj) 最大值必出現在idxj = minidx or maxidx 的地方
+        
         time: O(n)
+        greedy
         '''
         ls = []
         
