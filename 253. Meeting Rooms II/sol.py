@@ -13,7 +13,7 @@ class Solution:
         
         for start, end in intervals:
             
-            # check how ongoing conference ends when the meeting starts
+            # check if ongoing conference ends when the meeting starts
             while start >= ongoing[0]:
                 heapq.heappop(ongoing)
             
