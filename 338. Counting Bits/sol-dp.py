@@ -14,7 +14,7 @@ class Solution:
         P(x)=P(x/2)+(xmod2)
         '''
         n = 5
-        ans = [0] * (n+1)
+        ans = [0] * (n+1) # ans is num of 1s in int i
         
         for i in range(1, n+1):
             
