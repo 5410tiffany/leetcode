@@ -7,7 +7,7 @@ class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         '''
         1. dp(i) = 湊到i的最低硬幣數
-        2. dp(i) = min(dp(i-k) + dp(i+k)) for k in range(i)
+        2. dp(i) = min(dp(i-c) + 1) for c in coins
         3. b.c. 
             dp(c for c in coins) = 1 
             dp(0) = 0
@@ -16,6 +16,12 @@ class Solution:
         # debug
         # coins = [3]
         # amount = 4
+        
+        #speed up 
+        if amount == 0: return 0
+        elif amount < 0 or min(coins) > amount: return -1
+        
+        
         self.coins = coins
         self.dp = [inf] * (amount + 1)
         
