@@ -23,6 +23,13 @@ class Solution:
         2. yes-> lcs(s1, s2) = lcs(s1-a, s2-a) + 1
         '''
         #debug 
+        # text1 ='aaaa'
+        # text2 = 'aaaa'
+        
+        #speed up
+        if text2 in text1 or text1 in text2: 
+            return min(len(text1), len(text2))
+        
         self.text1 = text1
         self.text2 = text2
 
